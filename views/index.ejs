@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js" integrity="sha512-WL6WGKMPBiM9PnHRYIn5YEtq0Z8XP4fkVb4qy7PP4vhmYQErJ/dySyXuFIMDf1eEYCXCrQrMJfkNwKc9gsjTjA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    const socket = io("ws://localhost:7778");
+    socket.on("connect", () => {
+        socket.on("terminal", data => {
+            let actValue = document.getElementById("outText").value;
+            document.getElementById("outText").value = actValue + '\n' + data
+            console.log(data);
+        });
+    });
+
+function exec(){
+    socket.emit('exec', document.getElementById("env").value)
+    document.getElementById("output").style.visibility = "visible";
+}
+
+function stop(){
+    socket.emit('stop', 'document.getElementById("env").value');
+    document.getElementById("output").style.visibility = "visible";
+}
+</script>
+
+<div class="container">
+    <h1>panliadmin</h1>
+    .env
+    <textarea class="form-control mb-2" id="env"><%= env %></textarea>
+    <button class="btn btn-primary" onclick="exec()">Actualizar</button>
+    <button class="btn btn-danger" onclick="stop()">Stop</button>
+
+    <div id="output" class="mt-5" style="visibility: hidden;">
+        <label>Output:</label>
+        <textarea class="form-control" id="outText" rows="20"></textarea>
+    </div>
+</div>
