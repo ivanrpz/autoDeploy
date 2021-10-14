@@ -1,3 +1,4 @@
+<html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js" integrity="sha512-WL6WGKMPBiM9PnHRYIn5YEtq0Z8XP4fkVb4qy7PP4vhmYQErJ/dySyXuFIMDf1eEYCXCrQrMJfkNwKc9gsjTjA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
@@ -20,16 +21,25 @@ function stop(){
     document.getElementById("output").style.visibility = "visible";
 }
 </script>
-
-<div class="container">
-    <h1>panliadmin</h1>
+<div class="text-light bg-dark">
+<div class="container ">
+    <h1>autoDeploy</h1>
     .env
-    <textarea class="form-control mb-2" id="env"><%= env %></textarea>
+    <textarea class="form-control mb-2" id="env" ><%= env %></textarea>
+    <textarea class="form-control mb-2" id="env"><%= forever %></textarea>
     <button class="btn btn-primary" onclick="exec()">Actualizar</button>
     <button class="btn btn-danger" onclick="stop()">Stop</button>
 
-    <div id="output" class="mt-5" style="visibility: hidden;">
+    <div id="output" class="mt-5 pb-5" style="visibility: hidden;">
         <label>Output:</label>
         <textarea class="form-control" id="outText" rows="20"></textarea>
     </div>
 </div>
+</div>
+
+<style>
+textarea {
+  color: #f8f9fa!important;
+  background-color: black !important;
+    }
+</style>

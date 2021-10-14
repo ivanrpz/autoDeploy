@@ -22,8 +22,11 @@ app.set('view engine', 'ejs');
 
 app.get('/',function(req, res) {
     fs.readFile('./bot/.env', 'utf8' , (err, data) => {
-        console.log(data)
-        res.render('index', { env : data });
+        var forever = exec('forever list', (error, stdout, stderr) => {
+            console.log(stdout)
+            res.render('index', { env : data, forever: stdout });
+        })
+        
       })
 });
 
@@ -33,14 +36,14 @@ io.on('connection', (socket) => {
              if (err) socket.emit('terminal', err);
           });
         socket.emit('terminal', 'ENV CONFIG: \n' + newEnv + '\n');
-        var terminal = exec('ping -c 4 google.es')
+        var terminal = exec('echo "asd" & npm i')
         terminal.stdout.on('data', function(data) {
             socket.emit('terminal', data);
         });
     });
 
     socket.on('stop', (newEnv) => {
-        var terminal = exec('ping -c 4 google.com')
+        var terminal = exec('ping google.com')
         terminal.stdout.on('data', function(data) {
             socket.emit('terminal', data);
         });
