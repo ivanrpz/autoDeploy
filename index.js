@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
              if (err) socket.emit('terminal', err);
           });
         socket.emit('terminal', 'ENV CONFIG: \n' + newEnv + '\n');
-        var terminal = exec('echo "asd" & npm i')
+        var terminal = exec('echo "asd"')
         terminal.stdout.on('data', function(data) {
             socket.emit('terminal', data);
         });
