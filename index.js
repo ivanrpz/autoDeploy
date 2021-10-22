@@ -21,7 +21,7 @@ const io = new Server(server, {
 app.set('view engine', 'ejs');
 
 app.get('/',function(req, res) {
-    fs.readFile('./bot/.env', 'utf8' , (err, data) => {
+    fs.readFile('./RetraBot/.env', 'utf8' , (err, data) => {
         var forever = exec('forever list', (error, stdout, stderr) => {
             console.log(stdout)
             res.render('index', { env : data, forever: stdout });
